@@ -1,24 +1,55 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  creationTimestamp: null
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+  creationTimestamp: 2018-08-21T20:21:30Z
+  generation: 2
   labels:
-    io.kompose.service: slack-bughouse
-  name: slack-bughouse
+    app: slack-bughouse
+  name: slack-bughouse-jim-manual
+  namespace: default
+  resourceVersion: "27605"
+  selfLink: /apis/extensions/v1beta1/namespaces/default/deployments/slack-bughouse-jim-manual
+  uid: ca468939-a57f-11e8-ad8b-42010a800fef
 spec:
   replicas: 1
-  strategy: {}
+  selector:
+    matchLabels:
+      app: slack-bughouse
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: slack-bughouse
+        app: slack-bughouse
     spec:
       containers:
-      - image: slack-bughouse
+      - image: gcr.io/springboard-213917/slack-bughouse:latest
+        imagePullPolicy: Always
         name: slack-bughouse
-        ports:
-        - containerPort: 9090
         resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
       restartPolicy: Always
-status: {}
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: 2018-08-21T20:21:33Z
+    lastUpdateTime: 2018-08-21T20:21:33Z
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1
