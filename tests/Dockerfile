@@ -1,4 +1,5 @@
-FROM ubuntu:latest
-ADD . /
-RUN apt update && apt install -y curl
-ENTRYPOINT /test-it.sh
+FROM alpine:latest
+RUN apk add --update curl bash && rm -rf /var/cache/apk/*
+COPY test-it.sh /
+ENTRYPOINT ["/test-it.sh"]
+CMD ["curl"]
