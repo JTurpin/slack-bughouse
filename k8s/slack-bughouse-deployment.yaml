@@ -1,0 +1,24 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: slack-bughouse
+  name: slack-bughouse
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: slack-bughouse
+    spec:
+      containers:
+      - image: slack-bughouse
+        name: slack-bughouse
+        ports:
+        - containerPort: 9090
+        resources: {}
+      restartPolicy: Always
+status: {}
