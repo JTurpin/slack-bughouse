@@ -26,5 +26,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: my-docker-hub-namespace/my-docker-hub-repository
+          repository: ${{ secrets.DOCKERHUB_USERNAME }}/slack-bughouse
           tag_with_ref: true
